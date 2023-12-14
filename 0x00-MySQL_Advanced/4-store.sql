@@ -1,7 +1,7 @@
 -- creates a trigger that decreases the quantity
 -- of an item after adding a new order
-CREATE TRIGGER update_item_quantity
-AFTER INSERT ON order
+CREATE TRIGGER decreases_item_quantity
+AFTER INSERT ON orders
 FOR EACH ROW
   BEGIN
     UPDATE items
