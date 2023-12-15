@@ -1,6 +1,6 @@
 -- updates valid_email field whenever email is changed
 -- for a user.
-DELIMETER //
+DELIMITER //
 
 CREATE TRIGGER update_valid_email
 BEFORE UPDATE ON users
@@ -12,4 +12,4 @@ FOR EACH ROW
   END;
 //
 
-DELIMETER ;
+DELIMITER ;
