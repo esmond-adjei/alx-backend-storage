@@ -4,13 +4,14 @@
 DELIMITER //
 
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS DECIMAL(10,4) DETERMINISTIC
+RETURNS FLOAT DETERMINISTIC
 BEGIN
-  DECLARE result DECIMAL(10, 4);
+  DECLARE result FLOAT;
+
   IF b = 0 THEN
     SET result = 0;
   ELSE
-    SET result = (a * 1.0 / b);
+    SET result = a / b;
   END IF;
 
   RETURN result;
