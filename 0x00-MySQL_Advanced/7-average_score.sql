@@ -10,17 +10,10 @@ BEGIN
   DECLARE count_corrections INT;
   DECLARE average_score FLOAT;
 
-  -- calc: total score and correction counts
-  SELECT SUM(score), COUNT(*) INTO total_score, count_corrections
+  -- calc: average score and store in `average_score`
+  SELECT AVG(score) INTO average_score
   FROM corrections
-  WHERE user_id = user_id;
-
-  -- calc: average
-  IF count_corrections > 0 THEN
-    SET average_score = total_score / count_corrections;
-  ELSE
-    SET average_score = 0;
-  END IF;
+  WHERE corrections.user_id = user_id;
 
   -- apply changes
   UPDATE users
