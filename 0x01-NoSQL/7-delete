@@ -1,0 +1,3 @@
+// delete by match: deletes all documents with 
+// name="Holberton school" in the school.
+db.school.deleteMany({name: "Holberton school"});
