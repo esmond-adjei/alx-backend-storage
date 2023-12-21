@@ -19,6 +19,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     """stores the history of inputs and outputs"""
     @wraps(method)
@@ -39,6 +40,7 @@ def replay(fn: Callable) -> None:
     redis_store = getattr(fn.__self__, '_redis', None)
     if not isinstance(redis_store, redis.Redis):
         return
+
     fn_name = fn.__qualname__
     inputs_key = f"{fn_name}:inputs"
     outputs_key = f"{fn_name}:outputs"
@@ -46,11 +48,14 @@ def replay(fn: Callable) -> None:
     fn_call_count = 0
     if redis_store.exists(fn_name) != 0:
         fn_call_count = int(redis_store.get(fn_name))
+
     print(f"{fn_name} was called {fn_call_count} times:")
     fn_inputs = redis_store.lrange(inputs_key, 0, -1)
     fn_ouputs = redis_store.lrange(outputs_key, 0, -1)
+
     for fn_input, fn_ouput in zip(fn_inputs, fn_ouputs):
-        print(f"{fn_name}(*{fn_input.decode('utf-8')} -> {fn_ouput})
+        print(f"{fn_name}(*{fn_input.decode('utf-8')}) -> {fn_ouput})
+    return
 
 
 class Cache:
