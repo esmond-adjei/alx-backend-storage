@@ -55,7 +55,7 @@ def replay(fn: Callable) -> None:
     fn_ouputs = redis_store.lrange(outputs_key, 0, -1)
 
     for fn_input, fn_ouput in zip(fn_inputs, fn_ouputs):
-        print(f"{fn_name}(*{fn_input.decode('utf-8')}) -> {fn_ouput})
+        print(f"{fn_name}(*{fn_input.decode('utf-8')}) -> {fn_ouput}")
     return
 
 
