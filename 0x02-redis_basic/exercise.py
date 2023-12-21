@@ -4,9 +4,20 @@ Redis Basics
 """
 import redis
 import uuid
+from functools import wraps
 from typing import Union, Callable
 
 UnionMixin = Union[str, bytes, int, float]
+
+
+def count_calls(method: Callable) -> Callable:
+    """returns a wrapper function to count method calls"""
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """increments counts and invokes the method"""
+        count = self._redis.incr(method.__qualname__)
+        return method(self, *args, **kwargs)
+    return wrapper
 
 
 class Cache:
