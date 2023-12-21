@@ -26,6 +26,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: UnionMixin) -> str:
         """stores `data` in redis storage"""
         key = str(uuid.uuid4())
