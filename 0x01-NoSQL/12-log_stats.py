@@ -7,8 +7,9 @@ from pymongo import MongoClient
 
 def request_logs(collection):
     """print logs"""
-    print(f"{collection.count_documents({})")
-    
+    # print(f"{collection.count_documents({})")
+
+    # print("Methods:")
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     for method in methods:
         count = collection.count_documents({"method": method})
