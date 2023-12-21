@@ -24,7 +24,7 @@ class Cache:
     def get(self, key: str, fn: Callable = None) -> UnionMixin:
         """gets data from redis storage"""
         data = self._redis.get(key)
-        return fn(data) if fn is None else data
+        return fn(data) if fn is not None else data
 
     def get_str(self, key: str) -> str:
         """get a string from redis storage"""
