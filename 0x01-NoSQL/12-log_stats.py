@@ -5,7 +5,7 @@ log stats
 from pymongo import MongoClient
 
 
-client = MongoClient()
+client = MongoClient('mongodb://127.0.0.1:27017')
 db = client.logs
 collection = db.nginx
 
