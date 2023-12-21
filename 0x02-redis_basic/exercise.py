@@ -26,10 +26,10 @@ class Cache:
         data = self._redis.get(key)
         return fn(data) if fn is None else data
 
-    def get_str(self, key: str) -> Union[str, None]:
+    def get_str(self, key: str) -> str:
         """get a string from redis storage"""
         return self.get(key, fn=lambda d: d.decode('utf-8'))
 
-    def get_int(self, key: str) -> Union[int, None]:
+    def get_int(self, key: str) -> int:
         """get an integer from redis storage"""
         return self.get(key, fn=int)
